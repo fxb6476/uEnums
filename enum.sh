@@ -1,376 +1,146 @@
 #!/bin/sh
 
-BLACK="\033[30m"
-RED="\033[31m"
-GREEN="\033[32m"
-YELLOW="\033[33m"
-BLUE="\033[34m"
-PINK="\033[35m"
-CYAN="\033[36m"
-WHITE="\033[37m"
-NORMAL="\033[0;39m"
-
 # Quick Embedded Linux Local Enumeration Script 
 # v1.0
 
 sleep 0.4
 
-printf "Version: $YELLOW 1.0 $NORMAL \n"
+echo "Version: $YELLOW 1.0 $NORMAL \n"
 
 sleep 0.4
 
-printf "Author: $BLUE @Felix $NORMAL \n"
+echo "Author: $BLUE @Felix $NORMAL \n"
 
 sleep 0.4
-printf "\n"
-printf "\n"
+echo ""
+echo ""
 
 sleep 3
 
-printf "\n"
-printf "$BLUE"
-printf "##"
-printf "\n"
-printf "$RED"
-printf "$BLUE## $RED Uname Output."
-printf "\n"
-printf "$BLUE"
-printf "##"
-printf "\n"
-printf "$NORMAL"
-
+echo ""
+echo "######## Uname Output."
+echo ""
 uname -a
 
-printf "\n"
-printf "$BLUE"
-printf "##"
-printf "\n"
-printf "$RED"
-printf "$BLUE## $RED Busybox Commands."
-printf "\n"
-printf "$BLUE"
-printf "##"
-printf "\n"
-printf "$NORMAL"
+echo ""
+echo "######## Busybox Commands."
+echo ""
+/bin/busybox --help
 
-busybox --help
-
-printf "\n"
-printf "$BLUE"
-printf "##"
-printf "\n"
-printf "$RED"
-printf "$BLUE## $RED Executable Files."
-printf "\n"
-printf "$BLUE"
-printf "##"
-printf "\n"
-printf "$NORMAL"
-
+echo ""
+echo "######## Executable Files."
+echo ""
 #find / -type f -perm /u+x
-busybox find / -type f -perm /u+x
+/bin/busybox find / -type f -perm /u+x
 
-printf "\n"
-printf "$BLUE"
-printf "##"
-printf "\n"
-printf "$RED"
-printf "$BLUE## $RED Web Servers and Associated Technologies."
-printf "\n"
-printf "$BLUE"
-printf "##"
-printf "\n"
-printf "$NORMAL"
-
+echo ""
+echo "######## Web Servers and Associated Technologies."
+echo ""
 #find / -type f -perm /u+x -name "*httpd*" -o -name "*cgi*" -o -name "*nginx*" 
-busybox find / -type f -perm /u+x -name "*httpd*" -o -name "*cgi*" -o -name "*nginx*" 
+/bin/busybox find / -type f -perm /u+x -name "*httpd*" -o -name "*cgi*" -o -name "*nginx*" 
 
-printf "\n"
-printf "$BLUE"
-printf "##"
-printf "\n"
-printf "$RED"
-printf "$BLUE## $RED Library Versions."
-printf "\n"
-printf "$BLUE"
-printf "##"
-printf "\n"
-printf "$NORMAL"
+echo ""
+echo "######## Library Versions."
+echo ""
+for i in `/bin/busybox find / -type d -name lib`;do /bin/busybox find $i -type f;done
 
-for i in `busybox find / -type d -name lib`;do busybox find $i -type f;done
-
-printf "\n"
-printf "$BLUE"
-printf "##"
-printf "\n"
-printf "$RED"
-printf "$BLUE## $RED HTML, Javascript, cgi, and Config Files."
-printf "\n"
-printf "$BLUE"
-printf "##"
-printf "\n"
-printf "$NORMAL"
-
+echo ""
+echo "######## HTML, Javascript, cgi, and Config Files."
+echo ""
 #find / -name "*.htm*" -o -name "*.js" -o -name "*.cgi" -o -name "*.conf"
-busybox find / -name "*.htm*" -o -name "*.js" -o -name "*.cgi" -o -name "*.conf"
+/bin/busybox find / -name "*.htm*" -o -name "*.js" -o -name "*.cgi" -o -name "*.conf"
 
-printf "\n"
-printf "$BLUE"
-printf "##"
-printf "\n"
-printf "$RED"
-printf "$BLUE## $RED (Pem) Certificate files."
-printf "\n"
-printf "$BLUE"
-printf "##"
-printf "\n"
-printf "$NORMAL"
-
+echo ""
+echo "######## (Pem) Certificate files."
+echo ""
 #find / -name "*.pem"
-busybox find / -name "*.pem"
+/bin/busybox find / -name "*.pem"
 
-printf "\n"
-printf "$BLUE"
-printf "##"
-printf "\n"
-printf "$RED"
-printf "$BLUE## $RED Terminal Environment Variables."
-printf "\n"
-printf "$BLUE"
-printf "##"
-printf "\n"
-printf "$NORMAL"
-
+echo ""
+echo "######## Terminal Environment Variables."
+echo ""
 env
 
-printf "\n"
-printf "$BLUE"
-printf "##"
-printf "\n"
-printf "$RED"
-printf "$BLUE## $RED Grab Password Files."
-printf "\n"
-printf "$BLUE"
-printf "##"
-printf "\n"
-printf "$NORMAL"
-
+echo ""
+echo "######## Grab Password Files."
+echo ""
 cat /etc/passwd
 cat /etc/shadow
 
-printf "\n"
-printf "$BLUE"
-printf "##"
-printf "\n"
-printf "$RED"
-printf "$BLUE## $RED CPU Info."
-printf "\n"
-printf "$BLUE"
-printf "##"
-printf "\n"
-printf "$NORMAL"
-
+echo ""
+echo "######## CPU Info."
+echo ""
 cat /proc/cpuinfo
 
-printf "\n"
-printf "$BLUE"
-printf "##"
-printf "\n"
-printf "$RED"
-printf "$BLUE## $RED Kernel Command Line"
-printf "\n"
-printf "$BLUE"
-printf "##"
-printf "\n"
-printf "$NORMAL"
-
+echo ""
+echo "######## Kernel Command Line"
+echo ""
 cat /proc/cmdline
 
-printf "\n"
-printf "$BLUE"
-printf "##"
-printf "\n"
-printf "$RED"
-printf "$BLUE## $RED Running Processes."
-printf "\n"
-printf "$BLUE"
-printf "##"
-printf "\n"
-printf "$NORMAL"
-
+echo ""
+echo "######## Running Processes."
+echo ""
 ps -w
 
-printf "\n"
-printf "$BLUE"
-printf "##"
-printf "\n"
-printf "$RED"
-printf "$BLUE## $RED MTD Layout"
-printf "\n"
-printf "$BLUE"
-printf "##"
-printf "\n"
-printf "$NORMAL"
-
+echo ""
+echo "######## MTD Layout"
+echo ""
 cat /proc/mtd
 
-printf "\n"
-printf "$BLUE"
-printf "##"
-printf "\n"
-printf "$RED"
-printf "$BLUE## $RED MTD Partition Permissions.."
-printf "\n"
-printf "$BLUE"
-printf "##"
-printf "\n"
-printf "$NORMAL"
-
+echo ""
+echo "######## MTD Partition Permissions.."
+echo ""
 ls -l /dev/mtd*
 
-printf "\n"
-printf "$BLUE"
-printf "##"
-printf "\n"
-printf "$RED"
-printf "$BLUE## $RED /etc/inittab Contents."
-printf "\n"
-printf "$BLUE"
-printf "##"
-printf "\n"
-printf "$NORMAL"
-
+echo ""
+echo "######## /etc/inittab Contents."
+echo ""
 cat /etc/inittab
 
-printf "\n"
-printf "$BLUE"
-printf "##"
-printf "\n"
-printf "$RED"
-printf "$BLUE## $RED /etc/rc Contents."
-printf "\n"
-printf "$BLUE"
-printf "##"
-printf "\n"
-printf "$NORMAL"
-
+echo ""
+echo "######## /etc/rc Contents."
+echo ""
 cat /etc/rc
 
-printf "\n"
-printf "$BLUE"
-printf "##"
-printf "\n"
-printf "$RED"
-printf "$BLUE## $RED Loaded Kernel Modules."
-printf "\n"
-printf "$BLUE"
-printf "##"
-printf "\n"
-printf "$NORMAL"
-
+echo ""
+echo "######## Loaded Kernel Modules."
+echo ""
 lsmod
 
-printf "\n"
-printf "$BLUE"
-printf "##"
-printf "\n"
-printf "$RED"
-printf "$BLUE## $RED Firmware Environment Variables - Uboot."
-printf "\n"
-printf "$BLUE"
-printf "##"
-printf "\n"
-printf "$NORMAL"
-
+echo ""
+echo "######## Firmware Environment Variables - Uboot."
+echo ""
 fw_printenv
 
-printf "\n"
-printf "$BLUE"
-printf "##"
-printf "\n"
-printf "$RED"
-printf "$BLUE## $RED Firmware Config File."
-printf "\n"
-printf "$BLUE"
-printf "##"
-printf "\n"
-printf "$NORMAL"
-
+echo ""
+echo "######## Firmware Config File."
+echo ""
 cat /etc/fw_env.config
 
-printf "\n"
-printf "$BLUE"
-printf "##"
-printf "\n"
-printf "$RED"
-printf "$BLUE## $RED Root Directory Layout."
-printf "\n"
-printf "$BLUE"
-printf "##"
-printf "\n"
-printf "$NORMAL"
-
+echo ""
+echo "######## Root Directory Layout."
+echo ""
 ls -la /
 
-printf "\n"
-printf "$BLUE"
-printf "##"
-printf "\n"
-printf "$RED"
-printf "$BLUE## $RED Drilling /etc Structure."
-printf "\n"
-printf "$BLUE"
-printf "##"
-printf "\n"
-printf "$NORMAL"
-
+echo ""
+echo "######## Drilling /etc Structure."
+echo ""
 ls -R /etc
 
-printf "\n"
-printf "$BLUE"
-printf "##"
-printf "\n"
-printf "$RED"
-printf "$BLUE## $RED Drilling /bin Structure."
-printf "\n"
-printf "$BLUE"
-printf "##"
-printf "\n"
-printf "$NORMAL"
-
+echo ""
+echo "######## Drilling /bin Structure."
+echo ""
 ls -R /bin
 
-printf "\n"
-printf "$BLUE"
-printf "##"
-printf "\n"
-printf "$RED"
-printf "$BLUE## $RED Drilling /home Structure."
-printf "\n"
-printf "$BLUE"
-printf "##"
-printf "\n"
-printf "$NORMAL"
-
+echo ""
+echo "######## Drilling /home Structure."
+echo ""
 ls -R /home
 
-printf "\n"
-printf "$BLUE"
-printf "##"
-printf "\n"
-printf "$RED"
-printf "$BLUE## $RED Dmesg output."
-printf "\n"
-printf "$BLUE"
-printf "##"
-printf "\n"
-printf "$NORMAL"
-
+echo ""
+echo "######## Dmesg output."
+echo ""
 dmesg
 
-printf "$BLUE"
-printf "$NORMAL"
-
-printf "\n $RED So long!!! \n $NORMAL"
-
-printf "\n"
+echo "So long!!!"
+echo ""
